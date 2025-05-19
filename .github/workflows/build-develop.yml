@@ -48,9 +48,10 @@ jobs:
         run: |
           mkdir -p dockerBuildContext
           cp Dockerfile dockerBuildContext/
-          cp requirements.txt dockerBuildContext/
-          cp query_engine.py dockerBuildContext/
-          cp -r db/ dockerBuildContext/
+          cp mvnw dockerBuildContext/
+          cp pom.xml dockerBuildContext/
+          cp -r .mvn dockerBuildContext/
+          cp -r src dockerBuildContext/
           cp .env* dockerBuildContext/ || true
 
       - name: Upload build context as artifact
