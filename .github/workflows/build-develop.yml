@@ -34,6 +34,14 @@ jobs:
       - name: Build and analyze with SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_USERNAME: ${{ secrets.SUPABASE_USERNAME }}
+          SUPABASE_PASSWORD: ${{ secrets.SUPABASE_PASSWORD }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          CHATGPT_API_KEY: ${{ secrets.CHATGPT_API_KEY }}
+          CHATGPT_API_URL: ${{ secrets.CHATGPT_API_URL }}
+          LLAMA_API_URL: ${{ secrets.LLAMA_API_URL }}
+          LLAMA_API_KEY: ${{ secrets.CHATGPT_API_KEY }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MichaellIbarra_api-cognitive-services-evocortexai
 
       - name: Create build context
