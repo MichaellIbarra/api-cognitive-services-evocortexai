@@ -1,0 +1,11 @@
+services:
+  api-reactive:
+    container_name: api-reactive
+    image: michaellibarra/api-reactive
+    #    build:
+    #      context: ./
+    #      dockerfile: ./msvc-user/Dockerfile
+    ports:
+      - "8001:8001"
+    env_file:
+          - .env
