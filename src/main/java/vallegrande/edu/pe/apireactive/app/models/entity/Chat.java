@@ -31,4 +31,7 @@ public class Chat {
     @Column("created_at")
     @CreatedDate
     private LocalDateTime createdAt;
+
+    @Column("deleted")
+    private Boolean deleted = false; // Nuevo campo para borrado lógico
 }

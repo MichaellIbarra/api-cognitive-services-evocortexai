@@ -10,6 +10,7 @@ import vallegrande.edu.pe.apireactive.app.services.llamaService;
 
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/api/v1/llama")
 public class llamaRest {
@@ -28,5 +29,18 @@ public class llamaRest {
     @GetMapping("/chats")
     public Flux<Chat> getAllChats() {
         return service.getAllChats();
+    }
+
+    @PutMapping("/chats/{id}")
+    public Mono<ResponseEntity<Chat>> updateChat(@PathVariable Long id, @RequestBody ApiRequestDto request) {
+        return service.updateChat(id, request)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/chats/{id}")
+    public Mono<ResponseEntity<Void>> deleteChat(@PathVariable Long id) {
+        return service.deleteChat(id)
+                .thenReturn(ResponseEntity.noContent().build());
     }
 }

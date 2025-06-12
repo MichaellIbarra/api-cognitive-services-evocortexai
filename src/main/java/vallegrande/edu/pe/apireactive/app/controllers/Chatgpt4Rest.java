@@ -29,4 +29,17 @@ public class Chatgpt4Rest {
     public Flux<Chat> getAllChats() {
         return chatgpt4Service.getAllChats();
     }
+
+    @PutMapping("/chats/{id}")
+    public Mono<ResponseEntity<Chat>> updateChat(@PathVariable Long id, @RequestBody ApiRequestDto request) {
+        return chatgpt4Service.updateChat(id, request)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/chats/{id}")
+    public Mono<ResponseEntity<Void>> deleteChat(@PathVariable Long id) {
+        return chatgpt4Service.deleteChat(id)
+                .thenReturn(ResponseEntity.noContent().build());
+    }
 }
