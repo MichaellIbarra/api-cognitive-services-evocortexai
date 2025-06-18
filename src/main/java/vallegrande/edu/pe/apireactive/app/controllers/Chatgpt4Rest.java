@@ -9,7 +9,7 @@ import vallegrande.edu.pe.apireactive.app.models.entity.Chat;
 import vallegrande.edu.pe.apireactive.app.services.Chatgpt4Service;
 
 import java.util.Map;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/chatgpt4")
 public class Chatgpt4Rest {

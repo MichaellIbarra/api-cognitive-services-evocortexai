@@ -8,6 +8,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import vallegrande.edu.pe.apireactive.app.models.dto.ApiRequestDto;
 
+import java.util.Map;
+
 @Component
 public class ApiClientChatgpt {
 
@@ -23,11 +25,22 @@ public class ApiClientChatgpt {
                 .defaultHeader("x-evocortexai-key", apiKey)  // Intentar como encabezado predeterminado
                 .build();
     }
+//    {
+//        "model": "gpt-3.5-turbo",
+//            "messages": [{"role": "user", "content": "hola!"}],
+//        "stream": true
+//    }
+
 
     public Mono<String> sendRequest(ApiRequestDto request) {
+        Map<String, Object> body = Map.of(
+                "model", "gpt-3.5-turbo",
+                "messages", request.getMessages(),
+                "stream", true
+        );
         return webClient.post()
                 .header("x-evocortexai-key", apiKey)
-                .bodyValue(request)
+                .bodyValue(body)
                 .retrieve()
                 .onStatus(status -> !status.is2xxSuccessful(),
                         response -> response.bodyToMono(String.class)
