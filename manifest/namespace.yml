@@ -1,0 +1,10 @@
+# kubectl apply -f namespace.yml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: michaellibarra
+  labels:
+    environment: development
+    team: michaellibarra-vg
+  annotations:
+    owner: michaellibarra-vg

@@ -1,0 +1,23 @@
+# kubectl apply -f deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: age-detector-be
+  namespace: michaellibarra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: age-detector-be
+  template:
+    metadata:
+      labels:
+        app: age-detector-be
+    spec:
+      containers:
+      - name: age-detector-be
+        image: michaellibarra/api-cognitive-services-evocortexai:latest   # Reemplaza con tu imagen DockerHub
+        imagePullPolicy: IfNotPresent           # Evita bajar la imagen si ya existe
+        envFrom:
+            - secretRef:
+                name: credentials               # Cargar todo el Secret como variables de entorno
